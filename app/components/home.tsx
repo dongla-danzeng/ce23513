@@ -197,8 +197,8 @@ function _Home() {
               />
             </div>
             <div className={styles["sidebar-action"]}>
-              <IconButton
-                icon={<SettingsIcon />}
+<!--               <IconButton -->
+<!--                 icon={<SettingsIcon />} -->
                 onClick={() => {
                   setOpenSettings(true);
                   setShowSideBar(false);
@@ -208,7 +208,7 @@ function _Home() {
             </div>
             <div className={styles["sidebar-action"]}>
               <a href={REPO_URL} target="_blank">
-                <IconButton icon={<GithubIcon />} shadow />
+<!--                 <IconButton icon={<GithubIcon />} shadow /> -->
               </a>
             </div>
           </div>
