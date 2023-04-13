@@ -128,7 +128,7 @@ const cn = {
     },
     AccessCode: {
       Title: "授权码",
-      SubTitle: "请输入授权码，验明身份",
+      SubTitle: "请输入授权码，验明身份，输入完成后系统会自动保存，直接返回聊天页面就好了！",
       Placeholder: "请输入授权码",
     },
     Model: "模型 (model)",
