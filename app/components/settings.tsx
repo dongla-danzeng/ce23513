@@ -197,7 +197,11 @@ export function Settings(props: { closeSettings: () => void }) {
         </div>
       </div>
       <div className={styles["settings"]}>
-        
+        <List>
+          
+
+        </List>
+
         <List>
           {enabledAccessControl ? (
             <SettingItem
@@ -218,9 +222,18 @@ export function Settings(props: { closeSettings: () => void }) {
           )}
 
 
+
         </List>
 
+        <List>
 
+
+        </List>
+
+        <List>
+
+
+        </List>
       </div>
     </ErrorBoundary>
   );
