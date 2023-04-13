@@ -3,7 +3,7 @@ import { SubmitKey } from "../store/app";
 const cn = {
   WIP: "该功能仍在开发中……",
   Error: {
-    Unauthorized: "现在是未授权状态，请访问https://www.ihjycc.top 获取访问密码，并点击左下角设置按钮输入访问密码解除限制。",
+    Unauthorized: "现在是未授权状态，请访问https://www.ihjycc.top 获取授权码，并点击左下角设置按钮输入访问密码解除限制。",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} 条对话`,
@@ -127,9 +127,9 @@ const cn = {
       NoAccess: "输入 API Key 或访问密码查看余额",
     },
     AccessCode: {
-      Title: "访问密码",
-      SubTitle: "已开启加密访问",
-      Placeholder: "请输入访问密码",
+      Title: "授权码",
+      SubTitle: "请输入授权码，验明身份",
+      Placeholder: "请输入授权码",
     },
     Model: "模型 (model)",
     Temperature: {
