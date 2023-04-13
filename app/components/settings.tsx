@@ -474,29 +474,7 @@ export function Settings(props: { closeSettings: () => void }) {
           </SettingItem>
         </List>
 
-        <List>
-          <SettingItem title={Locale.Settings.Model}>
 
-          </SettingItem>
-          <SettingItem
-            title={Locale.Settings.Temperature.Title}
-            subTitle={Locale.Settings.Temperature.SubTitle}
-          >
-
-          </SettingItem>
-          <SettingItem
-            title={Locale.Settings.MaxTokens.Title}
-            subTitle={Locale.Settings.MaxTokens.SubTitle}
-          >
-
-          </SettingItem>
-          <SettingItem
-            title={Locale.Settings.PresencePenlty.Title}
-            subTitle={Locale.Settings.PresencePenlty.SubTitle}
-          >
-
-          </SettingItem>
-        </List>
       </div>
     </ErrorBoundary>
   );
