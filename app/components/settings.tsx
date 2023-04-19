@@ -262,7 +262,47 @@ export function Settings(props: { closeSettings: () => void }) {
             ></InputRange>
           </SettingItem>
         </List>
+        <List>
+          <SettingItem title={Locale.Settings.Avatar}>
+            <Popover
+              onClose={() => setShowEmojiPicker(false)}
+              content={
+                <EmojiPicker
+                  lazyLoadEmojis
+                  theme={EmojiTheme.AUTO}
+                  getEmojiUrl={getEmojiUrl}
+                  onEmojiClick={(e) => {
+                    updateConfig((config) => (config.avatar = e.unified));
+                    setShowEmojiPicker(false);
+                  }}
+                />
+              }
+              open={showEmojiPicker}
+            >
+              <div
+                className={styles.avatar}
+                onClick={() => setShowEmojiPicker(true)}
+              >
+                <Avatar role="user" />
+              </div>
+            </Popover>
+          </SettingItem>
 
+         
+
+          <SettingItem title={Locale.Settings.SendPreviewBubble}>
+            <input
+              type="checkbox"
+              checked={config.sendPreviewBubble}
+              onChange={(e) =>
+                updateConfig(
+                  (config) =>
+                    (config.sendPreviewBubble = e.currentTarget.checked),
+                )
+              }
+            ></input>
+          </SettingItem>
+        </List>
         
       </div>
     </ErrorBoundary>
