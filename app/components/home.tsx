@@ -2,8 +2,7 @@
 
 require("../polyfill");
 
-import { useState, useEffect, useRef } from "react";
-
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { IconButton } from "./button";
 import styles from "./home.module.scss";
 
@@ -24,6 +23,7 @@ import { Chat } from "./chat";
 import dynamic from "next/dynamic";
 import { REPO_URL } from "../constant";
 import { ErrorBoundary } from "./error";
+
 
 function isWeChatBrowser() {
   const userAgent = navigator.userAgent.toLowerCase();
