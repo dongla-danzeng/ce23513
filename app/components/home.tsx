@@ -281,3 +281,5 @@ export function Home() {
     </ErrorBoundary>
   );
 }
+  // ...原有的组件代码
+}
