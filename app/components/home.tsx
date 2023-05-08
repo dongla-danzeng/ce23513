@@ -44,7 +44,7 @@ function _Home() {
 
   // 在需要使用isWeChatBrowser和browserChecked的地方使用它们
 
-
+}
 
 export function Loading(props: { noLogo?: boolean }) {
   return (
