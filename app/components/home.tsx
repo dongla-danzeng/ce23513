@@ -38,11 +38,7 @@ function useCheckWeChatBrowser(){
 
   return [isWeChatBrowser, browserChecked];
 }
-function _Home() {
-  const [isWeChatBrowser, browserChecked] = useCheckWeChatBrowser();
-  // ...
 
-  // 在需要使用isWeChatBrowser和browserChecked的地方使用它们
 
 
 
