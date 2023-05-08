@@ -138,7 +138,7 @@ const useHasHydrated = () => {
 };
 
 function _Home() {
-   const [isAllowed, setIsAllowed] = useState(true);
+  const [isAllowed, setIsAllowed] = useState(true);
   useEffect(() => {
   if (!isWeChatBrowser()) {
     alert("请在微信中打开此页面");
