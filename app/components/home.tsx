@@ -25,6 +25,12 @@ import dynamic from "next/dynamic";
 import { REPO_URL } from "../constant";
 import { ErrorBoundary } from "./error";
 
+function isWeChatBrowser() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  return userAgent.includes("micromessenger");
+}
+
+
 export function Loading(props: { noLogo?: boolean }) {
   return (
     <div className={styles["loading-content"]}>
