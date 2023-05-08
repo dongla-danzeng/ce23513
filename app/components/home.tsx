@@ -139,6 +139,16 @@ const useHasHydrated = () => {
 };
 
 function _Home() {
+      
+     if (!isWeChatBrowser()) {
+    return (
+      <div className={styles["wechat-only-message"]}>
+        本网站仅支持在微信中使用，请在微信中打开。
+      </div>
+    );
+  }
+      
+      
   const [createNewSession, currentIndex, removeSession] = useChatStore(
     (state) => [
       state.newSession,
