@@ -279,4 +279,4 @@ export function Home() {
     </ErrorBoundary>
   );
 }
-}
+
