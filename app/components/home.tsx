@@ -157,7 +157,7 @@ function _Home() {
   const { onDragMouseDown } = useDragSideBar();
 
   useSwitchTheme();
-  
+  const [isAllowed, setIsAllowed] = useState(true);
   useEffect(() => {
   if (!isWeChatBrowser()) {
     alert("请在微信中打开此页面");
@@ -165,6 +165,9 @@ function _Home() {
       window.location.href = "https://www.example.com";
     }
   }, []);
+  if (!isAllowed) {
+    return null;
+  }
 
   if (loading) {
     return <Loading />;
