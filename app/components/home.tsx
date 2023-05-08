@@ -166,7 +166,7 @@ function _Home() {
   if (!isWeChatBrowser()) {
     alert("请在微信中打开此页面");
       // 如果需要，您可以执行其他操作，例如重定向用户到其他页面
-      window.location.replace = "https://www.example.com";
+      window.location.replace("https://www.example.com");
     }
   }, []);
   if (!isAllowed) {
