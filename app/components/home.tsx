@@ -25,33 +25,6 @@ import dynamic from "next/dynamic";
 import { REPO_URL } from "../constant";
 import { ErrorBoundary } from "./error";
 
-function useCheckWeChatBrowser(){
-  const [isWeChatBrowser, setIsWeChatBrowser] = useState(false);
-  const [browserChecked, setBrowserChecked] = useState(false);
-
-  useEffect(() => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isWeChat = userAgent.includes("micromessenger");
-    setIsWeChatBrowser(isWeChat);
-    setBrowserChecked(true);
-  }, []);
-
-    if (!browserChecked) {
-    return <Loading />;
-  }
-
-  if (!isWeChatBrowser) {
-    return (
-      <div>
-        <h2>抱歉，本站仅支持在微信浏览器中访问。</h2>
-      </div>
-    );
-  }
-}
-
-
-
-
 export function Loading(props: { noLogo?: boolean }) {
   return (
     <div className={styles["loading-content"]}>
@@ -285,4 +258,3 @@ export function Home() {
     </ErrorBoundary>
   );
 }
-
