@@ -36,7 +36,17 @@ function useCheckWeChatBrowser(){
     setBrowserChecked(true);
   }, []);
 
-  return [isWeChatBrowser, browserChecked];
+    if (!browserChecked) {
+    return <Loading />;
+  }
+
+  if (!isWeChatBrowser) {
+    return (
+      <div>
+        <h2>抱歉，本站仅支持在微信浏览器中访问。</h2>
+      </div>
+    );
+  }
 }
 
 
