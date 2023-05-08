@@ -149,6 +149,9 @@ function _Home() {
 
   useEffect(() => {
     setIsWeChat(isWeChatBrowser());
+  }, []);
+
+  useEffect(() => {
     setLoading(!useHasHydrated());
   }, []);
 
@@ -179,6 +182,7 @@ function _Home() {
   if (loading) {
     return <Loading />;
   }
+
 
   return (
     <div
