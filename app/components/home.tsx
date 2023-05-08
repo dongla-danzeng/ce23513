@@ -25,23 +25,6 @@ import dynamic from "next/dynamic";
 import { REPO_URL } from "../constant";
 import { ErrorBoundary } from "./error";
 
-export function Loading(props: { noLogo?: boolean }) {
-  return (
-    <div className={styles["loading-content"]}>
-      {!props.noLogo && <BotIcon />}
-      <LoadingIcon />
-    </div>
-  );
-}
-
-const Settings = dynamic(async () => (await import("./settings")).Settings, {
-  loading: () => <Loading noLogo />,
-});
-
-const ChatList = dynamic(async () => (await import("./chat-list")).ChatList, {
-  loading: () => <Loading noLogo />,
-});
-
 function useSwitchTheme() {
   const config = useChatStore((state) => state.config);
 
@@ -126,135 +109,136 @@ const useHasHydrated = () => {
   const [hasHydrated, setHasHydrated] = useState<boolean>(false);
 
   useEffect(() => {
-    setHasHydrated(true);
+    setHasHydrated
   }, []);
 
   return hasHydrated;
-};
-
-function _Home() {
+  };
+  
+  function _Home() {
   const [createNewSession, currentIndex, removeSession] = useChatStore(
-    (state) => [
-      state.newSession,
-      state.currentSessionIndex,
-      state.removeSession,
-    ],
+  (state) => [
+  state.newSession,
+  state.currentSessionIndex,
+  state.removeSession,
+  ],
   );
   const chatStore = useChatStore();
   const loading = !useHasHydrated();
   const [showSideBar, setShowSideBar] = useState(true);
-
+  
   // setting
   const [openSettings, setOpenSettings] = useState(false);
   const config = useChatStore((state) => state.config);
-
+  
   // drag side bar
   const { onDragMouseDown } = useDragSideBar();
-
+  
   useSwitchTheme();
-
-  if (loading) {
-    return <Loading />;
+  
+  useEffect(() => {
+  if (navigator.userAgent.toLowerCase().indexOf('micromessenger') === -1) {
+  // 不在微信客户端中，重定向到错误页面或者提示信息
+  window.location.href = '/error'; // 或者其他错误提示页面
   }
-
+  }, []);
+  
+  if (loading) {
+  return <Loading />;
+  }
+  
   return (
-    <div
-      className={`${
-        config.tightBorder && !isMobileScreen()
-          ? styles["tight-container"]
-          : styles.container
-      }`}
-    >
-      <div
-        className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
-      >
-        <div className={styles["sidebar-header"]}>
-          <div className={styles["sidebar-title"]}>GPT_ihjycc_2.0</div>
-          <div className={styles["sidebar-sub-title"]}>
-            黄甲岩的机器人.
-          </div>
-          <div className={styles["sidebar-logo"]}>
-            <ChatGptIcon />
-          </div>
-        </div>
+  <div
+  className={${ config.tightBorder && !isMobileScreen() ? styles["tight-container"] : styles.container }}
+  >
+  <div
+  className={styles.sidebar + ${showSideBar && styles["sidebar-show"]}}
+  >
+  <div className={styles["sidebar-header"]}>
+  <div className={styles["sidebar-title"]}>GPT_ihjycc_2.0</div>
+  <div className={styles["sidebar-sub-title"]}>
+  黄甲岩的机器人.
+  </div>
+  <div className={styles["sidebar-logo"]}>
+  <ChatGptIcon />
+  </div>
+  </div>    <div
+  className={styles["sidebar-body"]}
+  onClick={() => {
+    setOpenSettings(false);
+    setShowSideBar(false);
+  }}
+>
+  <ChatList />
+</div>
 
-        <div
-          className={styles["sidebar-body"]}
-          onClick={() => {
-            setOpenSettings(false);
-            setShowSideBar(false);
-          }}
-        >
-          <ChatList />
-        </div>
-
-        <div className={styles["sidebar-tail"]}>
-          <div className={styles["sidebar-actions"]}>
-            <div className={styles["sidebar-action"] + " " + styles.mobile}>
-              <IconButton
-                icon={<CloseIcon />}
-                onClick={chatStore.deleteSession}
-              />
-            </div>
-            <div className={styles["sidebar-action"]}>
-              <IconButton
-                icon={<SettingsIcon />}
-                onClick={() => {
-                  setOpenSettings(true);
-                  setShowSideBar(false);
-                }}
-                shadow
-              />
-            </div>
-            {/* <div className={styles["sidebar-action"]}>
-              <a href={REPO_URL} target="_blank">
-                <IconButton icon={<GithubIcon />} shadow />
-              </a>
-            </div> */}
-          </div>
-          <div>
-            <IconButton
-              icon={<AddIcon />}
-              text={Locale.Home.NewChat}
-              onClick={() => {
-                createNewSession();
-                setShowSideBar(false);
-              }}
-              shadow
-            />
-          </div>
-        </div>
-
-        <div
-          className={styles["sidebar-drag"]}
-          onMouseDown={(e) => onDragMouseDown(e as any)}
-        ></div>
-      </div>
-
-      <div className={styles["window-content"]}>
-        {openSettings ? (
-          <Settings
-            closeSettings={() => {
-              setOpenSettings(false);
-              setShowSideBar(true);
-            }}
-          />
-        ) : (
-          <Chat
-            key="chat"
-            showSideBar={() => setShowSideBar(true)}
-            sideBarShowing={showSideBar}
-          />
-        )}
-      </div>
+<div className={styles["sidebar-tail"]}>
+  <div className={styles["sidebar-actions"]}>
+    <div className={styles["sidebar-action"] + " " + styles.mobile}>
+      <IconButton
+        icon={<CloseIcon />}
+        onClick={chatStore.deleteSession}
+      />
     </div>
-  );
+    <div className={styles["sidebar-action"]}>
+      <IconButton
+        icon={<SettingsIcon />}
+        onClick={() => {
+          setOpenSettings(true);
+          setShowSideBar(false);
+        }}
+        shadow
+      />
+    </div>
+    {/* <div className={styles["sidebar-action"]}>
+      <a href={REPO_URL} target="_blank">
+        <IconButton icon={<GithubIcon />} shadow />
+      </a>
+    </div> */}
+  </div>
+  <div>
+    <IconButton
+      icon={<AddIcon />}
+      text={Locale.Home.NewChat}
+      onClick={() => {
+        createNewSession();
+        setShowSideBar(false);
+      }}
+      shadow
+    />
+  </div>
+</div>
+
+<div
+  className={styles["sidebar-drag"]}
+  onMouseDown={(e) => onDragMouseDown(e as any)}
+></div>
+</div>
+
+<div className={styles["window-content"]}>
+{openSettings ? (
+  <Settings
+    closeSettings={() => {
+      setOpenSettings(false);
+      setShowSideBar(true);
+    }}
+  />
+) : (
+  <Chat
+    key="chat"
+    showSideBar={() => setShowSideBar(true)}
+    sideBarShowing={showSideBar}
+  />
+)}
+</div>
+</div>
+);
 }
 
 export function Home() {
-  return (
-    <ErrorBoundary>
-      <_Home></_Home>
-    </ErrorBoundary>
-  );
+return
+<ErrorBoundary>
+  <_Home></_Home>
+</ErrorBoundary>
+);
 }
