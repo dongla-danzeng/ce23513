@@ -138,17 +138,20 @@ const useHasHydrated = () => {
   return hasHydrated;
 };
 
+import React, { useState, useEffect } from 'react';
+// ... other imports ...
+
 function _Home() {
-      
-     if (!isWeChatBrowser()) {
-    return (
-      <div className={styles["wechat-only-message"]}>
-        本网站仅支持在微信中使用，请在微信中打开。
-      </div>
-    );
-  }
-      
-      
+  const [isWeChat, setIsWeChat] = useState(false);
+  const [showSideBar, setShowSideBar] = useState(true);
+  const [openSettings, setOpenSettings] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setIsWeChat(isWeChatBrowser());
+    setLoading(!useHasHydrated());
+  }, []);
+
   const [createNewSession, currentIndex, removeSession] = useChatStore(
     (state) => [
       state.newSession,
@@ -156,18 +159,22 @@ function _Home() {
       state.removeSession,
     ],
   );
-  const chatStore = useChatStore();
-  const loading = !useHasHydrated();
-  const [showSideBar, setShowSideBar] = useState(true);
 
-  // setting
-  const [openSettings, setOpenSettings] = useState(false);
+  const chatStore = useChatStore();
   const config = useChatStore((state) => state.config);
 
   // drag side bar
   const { onDragMouseDown } = useDragSideBar();
 
   useSwitchTheme();
+
+  if (!isWeChat) {
+    return (
+      <div className={styles["wechat-only-message"]}>
+        本网站仅支持在微信中使用，请在微信中打开。
+      </div>
+    );
+  }
 
   if (loading) {
     return <Loading />;
@@ -254,19 +261,22 @@ function _Home() {
               setOpenSettings(false);
               setShowSideBar(true);
             }}
-          />
-        ) : (
-          <Chat
-            key="chat"
-            showSideBar={() => setShowSideBar(true)}
-            sideBarShowing={showSideBar}
-          />
-        )}
-      </div>
-    </div>
-  );
+         
+      />
+    ) : (
+      <Chat
+        key="chat"
+        showSideBar={() => setShowSideBar(true)}
+        sideBarShowing={showSideBar}
+      />
+    )}
+  </div>
+</div>
+);
 }
 
+export default _Home;
+        
 export function Home() {
   return (
     <ErrorBoundary>
