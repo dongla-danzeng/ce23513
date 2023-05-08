@@ -25,6 +25,20 @@ import dynamic from "next/dynamic";
 import { REPO_URL } from "../constant";
 import { ErrorBoundary } from "./error";
 
+function checkWeChatBrowser(): [boolean, boolean] {
+  const [isWeChatBrowser, setIsWeChatBrowser] = useState<boolean>(false);
+  const [browserChecked, setBrowserChecked] = useState<boolean>(false);
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isWeChat = userAgent.includes("micromessenger");
+    setIsWeChatBrowser(isWeChat);
+    setBrowserChecked(true);
+  }, []);
+
+  return [isWeChatBrowser, browserChecked];
+}
+
 
 export function Loading(props: { noLogo?: boolean }) {
   return (
