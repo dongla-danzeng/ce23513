@@ -138,7 +138,16 @@ const useHasHydrated = () => {
 };
 
 function _Home() {
-  const [isAllowed, setIsAllowed] = useState(true);
+
+  
+  const [createNewSession, currentIndex, removeSession] = useChatStore(
+    (state) => [
+      state.newSession,
+      state.currentSessionIndex,
+      state.removeSession,
+    ],
+  );
+    const [isAllowed, setIsAllowed] = useState(true);
   useEffect(() => {
   if (!isWeChatBrowser()) {
     alert("请在微信中打开此页面");
@@ -148,15 +157,7 @@ function _Home() {
   }, []);
   if (!isAllowed) {
     return null;
-  }
-  
-  const [createNewSession, currentIndex, removeSession] = useChatStore(
-    (state) => [
-      state.newSession,
-      state.currentSessionIndex,
-      state.removeSession,
-    ],
-  );
+  }    
   const chatStore = useChatStore();
   const loading = !useHasHydrated();
   const [showSideBar, setShowSideBar] = useState(true);
