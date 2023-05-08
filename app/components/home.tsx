@@ -25,6 +25,29 @@ import dynamic from "next/dynamic";
 import { REPO_URL } from "../constant";
 import { ErrorBoundary } from "./error";
 
+function _Home() {
+  const [isWeChatBrowser, setIsWeChatBrowser] = useState<boolean>(false);
+  const [browserChecked, setBrowserChecked] = useState<boolean>(false);
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isWeChat = userAgent.includes("micromessenger");
+    setIsWeChatBrowser(isWeChat);
+    setBrowserChecked(true);
+  }, []);
+
+  if (!browserChecked) {
+    return <Loading />;
+  }
+
+  if (!isWeChatBrowser) {
+    return (
+      <div>
+        <h2>抱歉，本站仅支持在微信浏览器中访问。</h2>
+      </div>
+    );
+  }
+
 export function Loading(props: { noLogo?: boolean }) {
   return (
     <div className={styles["loading-content"]}>
