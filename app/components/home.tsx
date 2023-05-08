@@ -138,6 +138,18 @@ const useHasHydrated = () => {
 };
 
 function _Home() {
+   const [isAllowed, setIsAllowed] = useState(true);
+  useEffect(() => {
+  if (!isWeChatBrowser()) {
+    alert("请在微信中打开此页面");
+      // 如果需要，您可以执行其他操作，例如重定向用户到其他页面
+      window.location.href = "https://www.example.com";
+    }
+  }, []);
+  if (!isAllowed) {
+    return null;
+  }
+  
   const [createNewSession, currentIndex, removeSession] = useChatStore(
     (state) => [
       state.newSession,
@@ -157,17 +169,7 @@ function _Home() {
   const { onDragMouseDown } = useDragSideBar();
 
   useSwitchTheme();
-  const [isAllowed, setIsAllowed] = useState(true);
-  useEffect(() => {
-  if (!isWeChatBrowser()) {
-    alert("请在微信中打开此页面");
-      // 如果需要，您可以执行其他操作，例如重定向用户到其他页面
-      window.location.href = "https://www.example.com";
-    }
-  }, []);
-  if (!isAllowed) {
-    return null;
-  }
+
 
   if (loading) {
     return <Loading />;
