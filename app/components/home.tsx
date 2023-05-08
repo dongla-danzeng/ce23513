@@ -2,7 +2,8 @@
 
 require("../polyfill");
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
+
 import { IconButton } from "./button";
 import styles from "./home.module.scss";
 
@@ -23,13 +24,6 @@ import { Chat } from "./chat";
 import dynamic from "next/dynamic";
 import { REPO_URL } from "../constant";
 import { ErrorBoundary } from "./error";
-
-
-function isWeChatBrowser() {
-  const userAgent = navigator.userAgent.toLowerCase();
-  return userAgent.includes("micromessenger");
-}
-
 
 export function Loading(props: { noLogo?: boolean }) {
   return (
@@ -138,23 +132,7 @@ const useHasHydrated = () => {
   return hasHydrated;
 };
 
-import React, { useState, useEffect } from 'react';
-// ... other imports ...
-
 function _Home() {
-  const [isWeChat, setIsWeChat] = useState(false);
-  const [showSideBar, setShowSideBar] = useState(true);
-  const [openSettings, setOpenSettings] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setIsWeChat(isWeChatBrowser());
-  }, []);
-
-  useEffect(() => {
-    setLoading(!useHasHydrated());
-  }, []);
-
   const [createNewSession, currentIndex, removeSession] = useChatStore(
     (state) => [
       state.newSession,
@@ -162,8 +140,12 @@ function _Home() {
       state.removeSession,
     ],
   );
-
   const chatStore = useChatStore();
+  const loading = !useHasHydrated();
+  const [showSideBar, setShowSideBar] = useState(true);
+
+  // setting
+  const [openSettings, setOpenSettings] = useState(false);
   const config = useChatStore((state) => state.config);
 
   // drag side bar
@@ -171,18 +153,9 @@ function _Home() {
 
   useSwitchTheme();
 
-  if (!isWeChat) {
-    return (
-      <div className={styles["wechat-only-message"]}>
-        本网站仅支持在微信中使用，请在微信中打开。
-      </div>
-    );
-  }
-
   if (loading) {
     return <Loading />;
   }
-
 
   return (
     <div
@@ -191,96 +164,93 @@ function _Home() {
           ? styles["tight-container"]
           : styles.container
       }`}
-    ><div
-className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
->
-<div className={styles["sidebar-header"]}>
-  <div className={styles["sidebar-title"]}>GPT_ihjycc_2.0</div>
-  <div className={styles["sidebar-sub-title"]}>
-    黄甲岩的机器人.
-  </div>
-  <div className={styles["sidebar-logo"]}>
-    <ChatGptIcon />
-  </div>
-</div>
+    >
+      <div
+        className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
+      >
+        <div className={styles["sidebar-header"]}>
+          <div className={styles["sidebar-title"]}>GPT_ihjycc_2.0</div>
+          <div className={styles["sidebar-sub-title"]}>
+            黄甲岩的机器人.
+          </div>
+          <div className={styles["sidebar-logo"]}>
+            <ChatGptIcon />
+          </div>
+        </div>
 
-<div
-  className={styles["sidebar-body"]}
-  onClick={() => {
-    setOpenSettings(false);
-    setShowSideBar(false);
-  }}
->
-  <ChatList />
-</div>
+        <div
+          className={styles["sidebar-body"]}
+          onClick={() => {
+            setOpenSettings(false);
+            setShowSideBar(false);
+          }}
+        >
+          <ChatList />
+        </div>
 
-<div className={styles["sidebar-tail"]}>
-  <div className={styles["sidebar-actions"]}>
-    <div className={styles["sidebar-action"] + " " + styles.mobile}>
-      <IconButton
-        icon={<CloseIcon />}
-        onClick={chatStore.deleteSession}
-      />
-    </div>
-    <div className={styles["sidebar-action"]}>
-      <IconButton
-        icon={<SettingsIcon />}
-        onClick={() => {
-          setOpenSettings(true);
-          setShowSideBar(false);
-        }}
-        shadow
-      />
-    </div>
-    {/* <div className={styles["sidebar-action"]}>
-      <a href={REPO_URL} target="_blank">
-        <IconButton icon={<GithubIcon />} shadow />
-      </a>
-    </div> */}
-  </div>
-  <div>
-    <IconButton
-      icon={<AddIcon />}
-      text={Locale.Home.NewChat}
-      onClick={() => {
-        createNewSession();
-        setShowSideBar(false);
-      }}
-      shadow
-    />
-  </div>
-</div>
+        <div className={styles["sidebar-tail"]}>
+          <div className={styles["sidebar-actions"]}>
+            <div className={styles["sidebar-action"] + " " + styles.mobile}>
+              <IconButton
+                icon={<CloseIcon />}
+                onClick={chatStore.deleteSession}
+              />
+            </div>
+            <div className={styles["sidebar-action"]}>
+              <IconButton
+                icon={<SettingsIcon />}
+                onClick={() => {
+                  setOpenSettings(true);
+                  setShowSideBar(false);
+                }}
+                shadow
+              />
+            </div>
+            {/* <div className={styles["sidebar-action"]}>
+              <a href={REPO_URL} target="_blank">
+                <IconButton icon={<GithubIcon />} shadow />
+              </a>
+            </div> */}
+          </div>
+          <div>
+            <IconButton
+              icon={<AddIcon />}
+              text={Locale.Home.NewChat}
+              onClick={() => {
+                createNewSession();
+                setShowSideBar(false);
+              }}
+              shadow
+            />
+          </div>
+        </div>
 
-<div
-  className={styles["sidebar-drag"]}
-  onMouseDown={(e) => onDragMouseDown(e as any)}
-></div>
-</div>
+        <div
+          className={styles["sidebar-drag"]}
+          onMouseDown={(e) => onDragMouseDown(e as any)}
+        ></div>
+      </div>
 
-<div className={styles["window-content"]}>
-{openSettings ? (
-  <Settings
-    closeSettings={() => {
-      setOpenSettings(false);
-      setShowSideBar(true);
-    }}
- 
-/>
-) : (
-<Chat
-key="chat"
-showSideBar={() => setShowSideBar(true)}
-sideBarShowing={showSideBar}
-/>
-)}
-</div>
-      {/* ... existing JSX ... */}
+      <div className={styles["window-content"]}>
+        {openSettings ? (
+          <Settings
+            closeSettings={() => {
+              setOpenSettings(false);
+              setShowSideBar(true);
+            }}
+          />
+        ) : (
+          <Chat
+            key="chat"
+            showSideBar={() => setShowSideBar(true)}
+            sideBarShowing={showSideBar}
+          />
+        )}
+      </div>
     </div>
   );
 }
 
-export default _Home;
-        
 export function Home() {
   return (
     <ErrorBoundary>
