@@ -25,7 +25,7 @@ import dynamic from "next/dynamic";
 import { REPO_URL } from "../constant";
 import { ErrorBoundary } from "./error";
 
-function checkWeChatBrowser(){
+function useCheckWeChatBrowser(){
   const [isWeChatBrowser, setIsWeChatBrowser] = useState(false);
   const [browserChecked, setBrowserChecked] = useState(false);
 
