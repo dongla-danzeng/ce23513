@@ -42,6 +42,11 @@ const ChatList = dynamic(async () => (await import("./chat-list")).ChatList, {
   loading: () => <Loading noLogo />,
 });
 
+function isWeChatBrowser() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  return userAgent.includes("micromessenger");
+}
+
 function useSwitchTheme() {
   const config = useChatStore((state) => state.config);
 
