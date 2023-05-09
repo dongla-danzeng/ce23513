@@ -161,7 +161,7 @@ function _Home() {
 
   useSwitchTheme();
   
-          const [isAllowed, setIsAllowed] = useState(true);
+<!--           const [isAllowed, setIsAllowed] = useState(true);
   useEffect(() => {
   if (!isWeChatBrowser()) {
     alert("请从微信公众号访问 错误代码WX00001");
@@ -171,7 +171,7 @@ function _Home() {
   }, []);
   if (!isAllowed) {
     return null;
-  }
+  } -->
   
 
 
