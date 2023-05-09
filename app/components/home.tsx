@@ -161,7 +161,17 @@ function _Home() {
 
   useSwitchTheme();
   
-
+  const [isAllowed, setIsAllowed] = useState(true);
+  useEffect(() => {
+  if (!isWeChatBrowser()) {
+    alert("请从微信公众号访问! 错误代码:WX00001");
+      // 如果需要，您可以执行其他操作，例如重定向用户到其他页面
+      window.location.replace("http://www.ihjycc.top");
+    }
+  }, []);
+  if (!isAllowed) {
+    return null;
+  }
   
 
 
