@@ -3,7 +3,7 @@ import { SubmitKey } from "../store/app";
 const cn = {
   WIP: "该功能仍在开发中……",
   Error: {
-    Unauthorized: "未输入授权码或授权码错误，请访问http://www.ihjycc.top 获取授权码，并在[设置](setOpenSettings(true))中更新授权码以解除限制。",
+    Unauthorized: "未输入授权码或授权码错误，请访问http://www.ihjycc.top 获取授权码，并在设置中更新授权码以解除限制。",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} 条对话`,
