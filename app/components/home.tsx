@@ -191,7 +191,7 @@ function _Home() {
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
       >
         <div className={styles["sidebar-header"]}>
-          <div className={styles["sidebar-title"]}>GPT_ihjycc_2.0</div>
+          <div className={styles["sidebar-title"]}>DANboyのchatGPT</div>
           <div className={styles["sidebar-sub-title"]}>
             ངག་བསྟན་གྱི་ཁ་བརྡ་འཕྲུལ་མི།.
           </div>
