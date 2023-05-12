@@ -164,9 +164,9 @@ function _Home() {
   const [isAllowed, setIsAllowed] = useState(true);
   useEffect(() => {
   if (!isWeChatBrowser()) {
-    alert("请从微信公众号访问! 错误代码:WX00001");
+    alert("请从微信公众号访问! 错误代码:WX00000");
       // 如果需要，您可以执行其他操作，例如重定向用户到其他页面
-      window.location.replace("http://www.ihjycc.top");
+      window.location.replace("https://danboy-1518.top");
     }
   }, []);
   if (!isAllowed) {
@@ -193,7 +193,7 @@ function _Home() {
         <div className={styles["sidebar-header"]}>
           <div className={styles["sidebar-title"]}>GPT_ihjycc_2.0</div>
           <div className={styles["sidebar-sub-title"]}>
-            黄甲岩的机器人.
+            ངག་བསྟན་གྱི་ཁ་བརྡ་འཕྲུལ་མི།.
           </div>
           <div className={styles["sidebar-logo"]}>
             <ChatGptIcon />
