@@ -164,7 +164,7 @@ function _Home() {
   const [isAllowed, setIsAllowed] = useState(true);
   useEffect(() => {
   if (!isWeChatBrowser()) {
-    alert("请从微信公众号访问! 错误代码:WX00000");
+    alert("该功能已配置到微信公众号! 错误代码:WX00000");
       // 如果需要，您可以执行其他操作，例如重定向用户到其他页面
       window.location.replace("https://danboy-1518.top");
     }
