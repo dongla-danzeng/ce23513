@@ -153,11 +153,8 @@ function _Home() {
   const [showSideBar, setShowSideBar] = useState(true);
 
   // setting
-  const [openSettings, setOpenSettings] = useState(false);
-  const config = useChatStore((state) => state.config);
-
-  // drag side bar
-  const [isAllowed, setIsAllowed] = useState(true);
+  const [openSettings, setOpenSettings] = useState(true);
+ 
 
   return (
     <div
