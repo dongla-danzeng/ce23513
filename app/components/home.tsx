@@ -151,9 +151,20 @@ function _Home() {
   const chatStore = useChatStore();
   const loading = !useHasHydrated();
   const [showSideBar, setShowSideBar] = useState(true);
-    // setting
-  const [openSettings, setOpenSettings] = useState(true);
+ // setting
+  const [openSettings, setOpenSettings] = useState(false);
   const config = useChatStore((state) => state.config);
+
+  // drag side bar
+  const { onDragMouseDown } = useDragSideBar();
+  useSwitchTheme();
+  const [isAllowed, setIsAllowed] = useState(true);
+  if (!isAllowed) {
+    return null;
+  }
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div
       className={`${
