@@ -157,27 +157,10 @@ function _Home() {
   const config = useChatStore((state) => state.config);
 
   // drag side bar
-  const { onDragMouseDown } = useDragSideBar();
+ const { onDragMouseDown } = useDragSideBar();
+ useSwitchTheme();
 
-  useSwitchTheme();
-  
-  const [isAllowed, setIsAllowed] = useState(true);
-  useEffect(() => {
-  if (!isWeChatBrowser()) {
-    alert("该功能已配置到微信公众号! 错误代码:WX00000");
-      // 如果需要，您可以执行其他操作，例如重定向用户到其他页面
-      window.location.replace("https://www.danboycrush.top/index.php/chatgptcode/");
-    }
-  }, []);
-  if (!isAllowed) {
-    return null;
-  }
-  
-
-
-  if (loading) {
-    return <Loading />;
-  }
+ return <Loading />;
 
   return (
     <div
