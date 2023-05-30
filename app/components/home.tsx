@@ -157,10 +157,7 @@ function _Home() {
   const config = useChatStore((state) => state.config);
 
   // drag side bar
- const { onDragMouseDown } = useDragSideBar();
- useSwitchTheme();
-
- return <Loading />;
+  const [isAllowed, setIsAllowed] = useState(true);
 
   return (
     <div
