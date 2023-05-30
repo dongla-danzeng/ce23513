@@ -149,13 +149,8 @@ function _Home() {
   );
     
   const chatStore = useChatStore();
-  const loading = !useHasHydrated();
+  const loading = useHasHydrated();
   const [showSideBar, setShowSideBar] = useState(true);
-
-  // setting
-  const [openSettings, setOpenSettings] = useState(true);
- 
-
   return (
     <div
       className={`${
